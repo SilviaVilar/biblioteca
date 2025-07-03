@@ -1,6 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
+
 name: Build and deploy PHP app to Azure Web App - bibliotecaLaravel
 
 on:
@@ -65,6 +66,15 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D62F15CF785F4F4ABA1924E315262F12 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_41F9ADE4BEFF45FFB9DE482A0F866880 }}
 
+      #Copia public en wwwroot
+      - name: Copy Laravel public folder content to root for App Service
+        run: |
+          rm -rf ./public/storage
+          cp -r public/* .
+          cp public/.htaccess . || true
+          sed -i 's|__DIR__ . \'/../|__DIR__ . \'/|g' index.php
+      #Fin copia public en wwwroot
+      
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
@@ -72,10 +82,4 @@ jobs:
           app-name: 'bibliotecaLaravel'
           slot-name: 'Production'
           package: .
-      - name: Copy Laravel public content to root
-        run: |
-          cp public/index.php index.php
-          cp -r public/* .
-          sed -i 's|__DIR__ . '\''/../vendor/autoload.php'\''|__DIR__ . '\''/vendor/autoload.php'\''|' index.php
-          sed -i 's|__DIR__ . '\''/../bootstrap/app.php'\''|__DIR__ . '\''/bootstrap/app.php'\''|' index.php
-   
+      
