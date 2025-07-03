@@ -72,4 +72,10 @@ jobs:
           app-name: 'bibliotecaLaravel'
           slot-name: 'Production'
           package: .
-          
+      - name: Copy Laravel public content to root
+        run: |
+          cp public/index.php index.php
+          cp -r public/* .
+          sed -i 's|__DIR__ . '\''/../vendor/autoload.php'\''|__DIR__ . '\''/vendor/autoload.php'\''|' index.php
+          sed -i 's|__DIR__ . '\''/../bootstrap/app.php'\''|__DIR__ . '\''/bootstrap/app.php'\''|' index.php
+   
