@@ -16,14 +16,9 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::get('/debug-cert', function () {
-    $path = storage_path('certs/BaltimoreCyberTrustRoot.crt.pem');
-
-    return [
-        'Ruta completa' => $path,
-        'Existe' => file_exists($path) ? 'Sí' : 'No',
-        'Contenido parcial' => file_exists($path) ? substr(file_get_contents($path), 0, 100) . '...' : 'Archivo no encontrado',
-    ];
+    return 'Ruta debug-cert activa';
 });
+
 
 
 
