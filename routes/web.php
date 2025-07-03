@@ -15,6 +15,18 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+Route::get('/debug-cert', function () {
+    $path = storage_path('certs/BaltimoreCyberTrustRoot.crt.pem');
+
+    return [
+        'Ruta completa' => $path,
+        'Existe' => file_exists($path) ? 'Sí' : 'No',
+        'Contenido parcial' => file_exists($path) ? substr(file_get_contents($path), 0, 100) . '...' : 'Archivo no encontrado',
+    ];
+});
+
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -45,17 +57,6 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 // Route::get('/libros', function () {
 //     return "Listado de libros";
 // })->name('libros_listado');
-
-Route::get('/debug-cert', function () {
-    $path = storage_path('certs/BaltimoreCyberTrustRoot.crt.pem');
-
-    return [
-        'Ruta completa' => $path,
-        'Existe' => file_exists($path) ? 'Sí' : 'No',
-        'Contenido parcial' => file_exists($path) ? substr(file_get_contents($path), 0, 100) . '...' : 'Archivo no encontrado',
-    ];
-});
-
 
 // Route::get('/libros/{id}', function ($id) {
 //     return "Ficha del libro $id";
