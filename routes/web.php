@@ -15,13 +15,6 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/debug-cert', function () {
-    return 'Ruta debug-cert activa';
-});
-
-
-
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
