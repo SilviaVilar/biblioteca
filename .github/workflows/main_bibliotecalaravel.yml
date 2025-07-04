@@ -80,7 +80,7 @@ jobs:
           rm -rf ./public/storage || true
           cp -r public/* . ||true
           if [ -f public/.htaccess ]; then cp public/.htaccess .; fi
-          if [ -f index.php ]; then sed -i 's|__DIR__ . \'/../|__DIR__ . \'/|g' index.php; fi
+          if [ -f index.php ]; then sed -i "s|__DIR__ . \'/../|__DIR__ . \'/|g" index.php; fi
       #Fin copia public en wwwroot
       
       - name: 'Deploy to Azure Web App'
