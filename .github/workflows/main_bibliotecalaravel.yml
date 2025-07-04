@@ -68,10 +68,10 @@ jobs:
       
       #debug copia
       - name: Verificar estructura de archivos
-          run: ls -R
-
+        run: ls -R
+        
       - name: Verificar existencia de index.php
-          run: ls -l index.php || echo "No existe index.php"
+        run: ls -l index.php || echo "No existe index.php"
 
       #Copia public en wwwroot
       - name: Copy Laravel public folder content to root for App Service
