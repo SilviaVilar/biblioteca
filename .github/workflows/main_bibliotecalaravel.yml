@@ -65,23 +65,25 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_307B5084369C46238FC636EF4EAF777F }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D62F15CF785F4F4ABA1924E315262F12 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_41F9ADE4BEFF45FFB9DE482A0F866880 }}
-      
+
+      #--Todo esto no es necesario al poner server.php
       #debug copia
-      - name: Verificar estructura de archivos
-        run: ls -R
+      #- name: Verificar estructura de archivos
+      #  run: ls -R
         
-      - name: Verificar existencia de index.php
-        run: ls -l index.php || echo "No existe index.php"
+      #- name: Verificar existencia de index.php
+      #  run: ls -l index.php || echo "No existe index.php"
 
       #Copia public en wwwroot
-      - name: Copy Laravel public folder content to root for App Service
-        run: |
-          mkdir -p public
-          rm -rf ./public/storage || true
-          cp -r public/* . ||true
-          if [ -f public/.htaccess ]; then cp public/.htaccess .; fi
-          if [ -f index.php ]; then sed -i "s|__DIR__ . \'/../|__DIR__ . \'/|g" index.php; fi
+      #- name: Copy Laravel public folder content to root for App Service
+      #  run: |
+      #    mkdir -p public
+      #    rm -rf ./public/storage || true
+      #    cp -r public/* . ||true
+      #    if [ -f public/.htaccess ]; then cp public/.htaccess .; fi
+      #    if [ -f index.php ]; then sed -i "s|__DIR__ . \'/../|__DIR__ . \'/|g" index.php; fi
       #Fin copia public en wwwroot
+      #--Fin de no es necesario al poner server.php
       
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
