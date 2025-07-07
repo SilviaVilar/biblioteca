@@ -16,8 +16,8 @@ use App\Http\Controllers\LoginController;
 */
 
 //Prueba .env
-Route::get('/env-check', function () {
-    return env('APP_KEY') ?? 'APP_KEY not found';
+Route::get('/saludo', function () {
+    return 'Hola soy Silvia desde Laravel';
 });
 
 
