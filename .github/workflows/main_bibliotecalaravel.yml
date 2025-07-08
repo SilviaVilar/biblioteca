@@ -68,20 +68,20 @@ jobs:
 
       #--Todo esto no es necesario al poner server.php
       #debug copia
-      - name: Verificar estructura de archivos
-        run: ls -R
+      #- name: Verificar estructura de archivos
+      #  run: ls -R
         
-      - name: Verificar existencia de index.php
-        run: ls -l index.php || echo "No existe index.php"
+      #- name: Verificar existencia de index.php
+      #  run: ls -l index.php || echo "No existe index.php"
 
       #Copia public en wwwroot
-      - name: Copy Laravel public folder content to root for App Service
-        run: |
-          mkdir -p public
-          rm -rf ./public/storage || true
-          cp -r public/* . ||true
-          if [ -f public/.htaccess ]; then cp public/.htaccess .; fi
-          if [ -f index.php ]; then sed -i "s|__DIR__ . \'/../|__DIR__ . \'/|g" index.php; fi
+      #- name: Copy Laravel public folder content to root for App Service
+      #  run: |
+      #    mkdir -p public
+      #    rm -rf ./public/storage || true
+      #    cp -r public/* . ||true
+      #    if [ -f public/.htaccess ]; then cp public/.htaccess .; fi
+      #    if [ -f index.php ]; then sed -i "s|__DIR__ . \'/../|__DIR__ . \'/|g" index.php; fi
       #Fin copia public en wwwroot
       #--Fin de no es necesario al poner server.php
       
