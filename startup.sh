@@ -1,18 +1,13 @@
 #!/bin/bash
 
-# Mover nginx.conf al lugar correcto
-mv /home/site/wwwroot/nginx.conf /etc/nginx/nginx.conf
-
-# Permisos para nginx.conf
-chmod 644 /etc/nginx/nginx.conf
-
-# Recargar nginx para que coja la configuración
-nginx -s reload
-
-# Arrancar php-fpm si no está en ejecución
-if ! pgrep php-fpm > /dev/null; then
-    php-fpm -D
+# Copiar nginx.conf si existe (no mover para evitar problemas de permisos)
+if [ -f /home/site/wwwroot/nginx.conf ]; then
+    cp /home/site/wwwroot/nginx.conf /etc/nginx/nginx.conf
+    chmod 644 /etc/nginx/nginx.conf
 fi
+
+# Arrancar php-fpm en background
+php-fpm -D
 
 # Arrancar nginx en primer plano (requisito contenedor)
 nginx -g 'daemon off;'
