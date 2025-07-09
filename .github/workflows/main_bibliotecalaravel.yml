@@ -92,4 +92,16 @@ jobs:
           app-name: 'bibliotecaLaravel'
           slot-name: 'Production'
           package: .
-      
+          
+      # Mover archivos luego del despliegue (opcional, si App Service lo permite)
+      - name: 'Fix file placement via SSH'
+        uses: azure/ssh@v1
+        with:
+         host: ${{ secrets.AZURE_WEBAPP_HOST }}
+         username: ${{ secrets.AZURE_WEBAPP_USERNAME }}
+         key: ${{ secrets.AZURE_WEBAPP_SSH_KEY }}
+         script: |
+            mv /home/site/wwwroot/nginx.conf /home/site/nginx.conf || true
+            mv /home/site/wwwroot/startup.sh /home/site/startup.sh || true
+            chmod +x /home/site/startup.sh || true
+    
